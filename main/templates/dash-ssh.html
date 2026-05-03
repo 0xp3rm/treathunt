@@ -1,0 +1,175 @@
+<!-- SSH Info Modal -->
+<div class="modal fade" id="sshinfoModal" tabindex="-1" aria-labelledby="sshinfoModalLabel" aria-hidden="true"
+    data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog mt-5" style="max-width: 500px;">
+        <div class="modal-content bg-secondary text-white p-4">
+
+            <div class="modal-body text-center py-4">
+                <div class="text-center">
+                    <p class="mb-3 fs-5">
+                        Monitor Secure Shell Logs
+                    </p>
+
+                    <ul class="list-unstyled text-start d-inline-block fs-6">
+                        <li class="mb-2">
+                            <span>Status - Display the status of the SSH Server</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="btn btn-primary">Clear</span>
+                            <span>Clear Secure Shell logs from Event Viewer</span>
+                        </li>
+                        <li class="mb-2">
+                            <span><strong style="color: red;">Anomaly</strong> - Check for SSH failed login
+                                attempts</span>
+                        </li>
+                        <li class="mb-2">
+                            <span><strong style="color: red;">Attempt</strong> - List the count of SSH failed login
+                                attempt for each IP</span>
+                        </li>
+                        <li class="mb-2">
+                            <span><strong style="color: red;">Allow</strong> - List allowed IP addresses for SSH
+                                connection</span>
+                        </li>
+                        <li class="mb-2">
+                            <span><strong style="color: red;">Block</strong> - List blocked IP addresses for SSH
+                                connection</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="modal-footer justify-content-center pt-3 pb-2 border-0">
+                <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- SSH DIV SECTION -->
+<div class="container-fluid pt-4 px-4">
+
+    <div id="spinner"
+        class="show position-fixed w-100 vh-100 top-0 start-0 d-flex align-items-center justify-content-center"
+        style="z-index: 1050; display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-9" style="height: 680px;">
+            <div class="bg-secondary rounded h-100 p-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center bg-secondary rounded p-3">
+                    <!-- Left: Title + Help button -->
+                    <div class="d-flex align-items-center mb-2 mb-md-0">
+                        <h5 class="mb-0 me-2">Secure Shell</h5>
+                        <button
+                            class="btn btn-dark btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                            style="width: 32px; height: 32px;" data-bs-toggle="modal" data-bs-target="#sshinfoModal">
+                            <i class="fa fa-question-circle"></i>
+                        </button>
+                    </div>
+
+                    <!-- Middle: Status -->
+                    <div class="col-auto me-md-3 mb-2 mb-md-0">
+                        Status: <span id="ssh-status"
+                            style="min-width: 60px; display: inline-block; color: red;"></span>
+                    </div>
+
+                    <!-- Right: Action -->
+                    <button type="button" class="btn btn-primary" onclick="clear_ssh_log()">Clear</button>
+                </div>
+
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-ssh-anomaly-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-ssh-anomaly" type="button" role="tab" aria-controls="nav-ssh-anomaly"
+                            aria-selected="true">Anomaly</button>
+
+                        <button class="nav-link" id="nav-ssh-attempt-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-ssh-attempt" type="button" role="tab" aria-controls="nav-ssh-attempt"
+                            aria-selected="true">Attempt</button>
+
+                        <button class="nav-link" id="nav-ssh-allow-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-ssh-allow" type="button" role="tab" aria-controls="nav-ssh-allow"
+                            aria-selected="true" onclick="showSSHAllowRule()">Allow</button>
+
+                        <button class="nav-link" id="nav-ssh-block-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-ssh-block" type="button" role="tab" aria-controls="nav-ssh-block"
+                            aria-selected="true" onclick="showSSHBlockRule()">Block</button>
+                    </div>
+
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade active show" id="nav-ssh-anomaly" role="tabpanel"
+                        aria-labelledby="nav-ssh-anomaly-tab">
+                        <div class="overflow-auto" style="max-height: 500px;">
+                            <table class="table table-dark rounded">
+                                <tbody id="ssh-anomaly-log-body" style=" color: whitesmoke;">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-ssh-attempt" role="tabpanel" aria-labelledby="nav-ssh-attempt">
+                        <div class="overflow-auto" style="max-height: 500px;">
+                            <table class="table table-dark rounded">
+                                <tbody id="ssh-attempt-log-body" style="color: whitesmoke;"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-ssh-allow" role="tabpanel" aria-labelledby="nav-ssh-allow">
+                        <div class="overflow-auto" style="max-height: 500px;">
+                            <table class="table table-dark rounded">
+                                <tbody id="ssh-allow-ip-rule" style="color: whitesmoke;"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-ssh-block" role="tabpanel" aria-labelledby="nav-ssh-block">
+                        <div class="overflow-auto" style="max-height: 500px;">
+                            <table class="table table-dark rounded">
+                                <tbody id="ssh-block-ip-rule" style="color: whitesmoke;"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-3">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h5 class="mb-4 text-center">Generate Report</h5>
+                <div class="d-grid gap-3">
+                    <button class="btn btn-outline-info" onclick="download_ssh_anomaly()">Anomaly</button>
+                    <button class="btn btn-outline-info" onclick="download_ssh_attempt()">Attempt</button>
+                    <button class="btn btn-outline-info" onclick="download_ssh_allow()">Allowlist</button>
+                    <button class="btn btn-outline-info" onclick="download_ssh_block()">Blocklist</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- IP Lookup Modal -->
+<div class="modal fade" id="showLookUpDetails" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content bg-secondary text-white">
+            <div class="modal-header">
+                <h5 class="modal-title">IP Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div id="ipDetailsText" class="col-lg-7 row g-3 fs-6 pt-0" style="margin-top: 0;"></div>
+                    <div class="col-lg-5">
+                        <div id="ipMap" style="height: 400px; border-radius: 10px;"></div>
+                    </div>
+                </div>
+                <div id="lookupError" class="text-danger mt-3 d-none">Failed to load IP details.</div>
+            </div>
+        </div>
+    </div>
+</div>

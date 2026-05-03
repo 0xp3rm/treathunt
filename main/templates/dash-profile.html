@@ -1,0 +1,105 @@
+<form id="uploadForm" enctype="multipart/form-data">
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-12 h-100">
+                <section class="bg-secondary rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h5 class="text-primary mb-0">
+                            Profile Info
+                        </h5>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-start mb-4 flex-wrap">
+                        <div>
+                            <p><strong>Username:</strong> {% if logged_in %}{{ username }}{% endif %}</p>
+
+                            <div class="mt-3">
+                                <div class="d-flex gap-2">
+                                    <input name="profile_pic" class="form-control bg-dark text-white" type="file"
+                                        id="formFile" onchange="showUploadBtn(this)">
+                                    <button type="button" onclick="deletePhoto()" class="btn btn-danger"
+                                        style="min-width: 150px;">
+                                        Delete Photo
+                                    </button>
+                                </div>
+                                <button type="button" id="uploadProfileBtn" class="btn btn-info mt-3 d-none"
+                                    onclick="uploadProfilePicBtn(event)">
+                                    Upload
+                                </button>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <img id="previewImage" class="img-fluid"
+                                src="{{url_for('static', filename='images/default-image.jpg') }}"
+                                style="width: 100px; height: 100px;" alt="Profile Preview">
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="container-fluid py-4 px-4">
+    <div class="row g-4">
+        <!-- Change Password Column -->
+        <div class="col-lg-6">
+            <div class="bg-secondary rounded p-4 w-100 h-100">
+                <!-- Header -->
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h5 class="text-primary mb-0">
+                        Change Password
+                    </h5>
+                </div>
+
+                <!-- Edit Profile Form -->
+                <form id="update-password-form">
+                    <div class="mb-3">
+                        <label for="old-password-1" class="form-label text-white">Old Password</label>
+                        <input type="password" class="form-control bg-dark text-white" id="old-password-1"
+                            name="old-password" placeholder="Enter old password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="new-password-1" class="form-label text-white">New Password</label>
+                        <input type="password" class="form-control bg-dark text-white" id="new-password-1"
+                            name="new-password" placeholder="Enter new password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword-1" class="form-label text-white">Confirm Password</label>
+                        <input type="password" class="form-control bg-dark text-white" id="confirmPassword-1"
+                            name="confirm-password" placeholder="Confirm new password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="updateChangePassword()">Update
+                        Password</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Reset Passphrase Column -->
+        <div class="col-lg-6">
+            <div class="bg-secondary rounded p-4 w-100 h-100">
+                <!-- Header -->
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h5 class="text-primary mb-0">
+                        Set Passphrase
+                    </h5>
+                </div>
+
+                <!-- Edit Profile Form -->
+                <form id="reset-passphrase-form">
+                    <div class="mb-3">
+                        <label for="old-password-2" class="form-label text-white">New Passphrase</label>
+                        <input type="password" class="form-control bg-dark text-white" id="old-password-2"
+                            name="new-passphrase" placeholder="Set Passphrase" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="new-password-2" class="form-label text-white">Confirm Passphrase</label>
+                        <input type="password" class="form-control bg-dark text-white" id="new-password-2"
+                            name="confirm-passphrase" placeholder="Confirm Passphrase" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="updateChangePassphrase()">Update
+                        Passphrase</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

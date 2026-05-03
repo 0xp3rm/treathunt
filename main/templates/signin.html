@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include '/components/head.html' %}
+
+<body>
+    <div class="container-fluid">
+        <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                    <!-- Login Form -->
+                    <div id="loginFormWrapper">
+                        <div class="text-center mb-4">
+                            <h4>Login to ThreatHunt</h4>
+                        </div>
+                        <form id="loginForm">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="username" id="username-login"
+                                    placeholder="Username" autocomplete="off" required>
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="form-floating mb-4 position-relative">
+                                <input type="password" name="password" class="form-control" id="password"
+                                    placeholder="Password" required>
+                                <label for="password">Password</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary py-2 w-100 mb-4">Login</button>
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <a href="#" onclick="showForm('registerFormWrapper')">Create Account</a>
+                                <a href="#" onclick="showForm('forgotFormWrapper')">Reset Password</a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Reset Password Form -->
+                    <div id="forgotFormWrapper" class="d-none">
+                        <div class="text-center mb-4">
+                            <h4>Forgot Password</h4>
+                        </div>
+                        <form id="forgotPasswordForm">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="passphrase" placeholder="Enter Passphrase"
+                                    autocomplete="off" required>
+                                <label for="passphrase">Passphrase</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="password" class="form-control" id="username" name="username"
+                                    placeholder="Enter Username" autocomplete="off" required>
+                                <label for="registerConfirm">Username</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" name="new-password"
+                                    placeholder="New Password" required>
+                                <label for="registerPassword">New Password</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" name="confirm-password"
+                                    placeholder="Confirm Password" required>
+                                <label for="registerPassword">Confirm Password</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary py-2 w-100 mb-4">Reset Password</button>
+                            <div class="text-center">
+                                <a href="#" onclick="showForm('loginFormWrapper')">Back to Login</a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Create Account Form -->
+                    <div id="registerFormWrapper" class="d-none">
+                        <div class="text-center mb-4">
+                            <h4>Register Account</h4>
+                        </div>
+                        <form id="registerForm">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="registerUsername" name="registerUsername"
+                                    placeholder="Username" autocomplete="off" required>
+                                <label for="registerUsername">Username</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" name="registerPassword"
+                                    placeholder="Password" autocomplete="off" required>
+                                <label for="registerPassword">Password</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="password" class="form-control" id="registerConfirm" name="registerConfirm"
+                                    placeholder="Confirm Password" autocomplete="off" required>
+                                <label for="registerConfirm">Confirm Password</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary py-2 w-100 mb-4">Register</button>
+                            <div class="text-center">
+                                <a href="#" onclick="showForm('loginFormWrapper')">Back to Login</a>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for toggling forms -->
+    <script>
+        function showForm(formId) {
+            const forms = ['loginFormWrapper', 'forgotFormWrapper', 'registerFormWrapper'];
+            forms.forEach(id => {
+                document.getElementById(id).classList.add('d-none');
+            });
+            document.getElementById(formId).classList.remove('d-none');
+        }
+    </script>
+
+    {% include '/components/not-signin.html' %}
+
+</body>
+
+</html>

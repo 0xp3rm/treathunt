@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include '/components/head.html' %}
+
+<body>
+
+    <div class="container-fluid position-relative d-flex p-0">
+        {% include '/partials/sidebar.html' %}
+
+        <div class="content">
+            {% include '/components/navbar.html' %}
+
+            <div id="dynamic-content">
+                {% if request.path == '/dash/board' %}
+                {% include 'dash-board.html' %}
+                {% endif %}
+
+                {% if request.path == '/dash/rules' %}
+                {% include 'dash-rules.html' %}
+                {% endif %}
+
+                {% if request.path == '/dash/connection' %}
+                {% include 'dash-connection.html' %}
+                {% endif %}
+
+                {% if request.path == '/dash/sysinfo' %}
+                {% include 'dash-sysinfo.html' %}
+                {% endif %}
+
+                {% if request.path == '/dash/about' %}
+                {% include 'dash-about.html' %}
+                {% endif %}
+
+                {% if request.path == '/dash/ssh' %}
+                {% include 'dash-ssh.html' %}
+                {% endif %}
+
+                {% if request.path == '/dash/profile' %}
+                {% include 'dash-profile.html' %}
+                {% endif %}
+
+                {% include '/components/footer.html' %}
+            </div>
+
+        </div>
+        {% include '/components/javascript.html' %}
+    </div>
+
+
+
+</body>
+
+</html>

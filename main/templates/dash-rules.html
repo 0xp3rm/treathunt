@@ -1,0 +1,170 @@
+<!-- Rule Form Modal -->
+<div class="modal fade" id="ruleFormModal" tabindex="-1" aria-labelledby="ruleFormModalLabel" aria-hidden="true"
+    data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-lg  modal-dialog-scrollable">
+        <div class="modal-content bg-secondary text-white">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center" id="ruleFormModalLabel">Add Firewall Rule</h5>
+            </div>
+            <div class="modal-body">
+                <form class="row g-4" id="ruleFirewallFormCreation">
+                    <div class="col-md-4">
+                        <label for="rulename" class="form-label">Rule Name</label>
+                        <input type="text" class="form-control" id="rulename" name="rulename" autocomplete="off"
+                            required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="ruledirection" class="form-label">Direction</label>
+                        <select class="form-select" id="ruledirection" name="ruledirection" required>
+                            <option selected>Inbound</option>
+                            <option>Outbound</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="ruleprotocol" class="form-label">Protocol</label>
+                        <select class="form-select" id="ruleprotocol" name="ruleprotocol" required>
+                            <option value="TCP" selected>TCP</option>
+                            <option value="UDP">UDP</option>
+                            <option value="ICMPv4">ICMPv4</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="ruleaction" class="form-label">Action</label>
+                        <select id="ruleaction" name="ruleaction" class="form-select" required>
+                            <option value="Allow" selected>Allow</option>
+                            <option value="Block">Block</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="localport" class="form-label">Local Port</label>
+                        <input type="text" id="localport" class="form-control" name="localport" autocomplete="off">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="localport" class="form-label">Local Address</label>
+                        <input type="text" id="localaddress" class="form-control" name="localaddress"
+                            autocomplete="off">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="remoteport" class="form-label">Remote Port</label>
+                        <input type="text" id="remoteport" name="remoteport" class="form-control" name="remoteport"
+                            autocomplete="off">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="remoteport" class="form-label">Remote Address</label>
+                        <input type="text" id="remoteaddress" class="form-control" name="remoteaddress"
+                            autocomplete="off">
+                    </div>
+                    <div class="col-12 text-center mt-5">
+                        <button type="submit" class="btn btn-primary">Add Rule</button>
+                        <button type="button" class="btn btn-info ms-2" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Rule form control-->
+
+<!-- DELETE FIREWALL MODAL  -->
+<div class="modal fade" id="deleteRuleModal" tabindex="-1" aria-labelledby="deleteRuleModalLabel" aria-hidden="true"
+    data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog mt-5" style="max-width: 500px;">
+        <div class="modal-content bg-secondary text-white p-4">
+            <div class="modal-body text-center py-4">
+                <p class="mb-0 fs-5">
+                    Delete <strong id="ruleToDeleteName" style="color: red;"></strong>
+                </p>
+            </div>
+            <div class="modal-footer justify-content-center pt-3 pb-2 border-0">
+                <button type="button" class="btn btn-primary me-2" id="confirmDeleteBtn">Delete</button>
+                <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Rule help modal -->
+<div class="modal fade" id="ruleinfoModal" tabindex="-1" aria-labelledby="ruleinfoModalLabel" aria-hidden="true"
+    data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog mt-5" style="max-width: 500px;">
+        <div class="modal-content bg-secondary text-white p-4">
+
+            <div class="modal-body text-center py-4">
+                <div class="text-center">
+                    <p class="mb-3 fs-5">
+                        Create and manage your own Firewall Rules
+                    </p>
+
+                    <ul class="list-unstyled text-start d-inline-block fs-6">
+                        <li class="mb-2">
+                            <span class="badge bg-primary me-2">New Rule</span>
+                            <span>Create a new firewall rule</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fa fa-trash text-danger me-2"></i>
+                            <span>Delete a firewall rule</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="modal-footer justify-content-center pt-3 pb-2 border-0">
+                <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid pt-4 px-4">
+    <div class="col-12">
+        <div class="bg-secondary rounded p-4 d-flex flex-column" style="height: 670px;">
+
+            <!-- Spinner -->
+            <div id="spinner"
+                class="show position-fixed w-100 vh-100 top-0 start-0 d-flex align-items-center justify-content-center"
+                style="z-index: 1050; display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <!-- Header and Button -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center">
+                    <h6 class="mb-0 me-2">Firewall Rules</h6>
+                    <button class="btn btn-dark btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                        style="width: 32px; height: 32px;" data-bs-toggle="modal" data-bs-target="#ruleinfoModal">
+                        <i class="fa fa-question-circle"></i>
+                    </button>
+                </div>
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ruleFormModal">
+                    New Rule
+                </button>
+            </div>
+
+            <div class="table-responsive flex-grow-1 overflow-auto" style="max-height: 100%;">
+                <table class="table table-bordered table-hover m-0">
+                    <thead class="table-dark sticky-top" style="top: 0; z-index: 1020;">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Direction</th>
+                            <th scope="col">Protocol</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Local Port</th>
+                            <th scope="col">Local Address</th>
+                            <th scope="col">Remote Port</th>
+                            <th scope="col">Remote Address</th>
+                            <th scope="col" class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ruleFirewallBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

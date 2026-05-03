@@ -1,0 +1,123 @@
+<!-- Connection Info Modal -->
+<div class="modal fade" id="connectioninfoModal" tabindex="-1" aria-labelledby="connectioninfoModalLabel"
+    aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog mt-5" style="max-width: 500px;">
+        <div class="modal-content bg-secondary text-white p-4">
+
+            <div class="modal-body text-center py-4">
+                <div class="text-center">
+                    <p class="mb-3 fs-5">
+                        Monitor Remote Address Connection.
+                    </p>
+
+                    <ul class="list-unstyled text-start d-inline-block fs-6">
+                        <li class="mb-2">
+                            <span class="text-danger">Local Address: </span>
+                            <span>Local address of the machine</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="text-danger">Local Port: </span>
+                            <span>Local port of the machine</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="text-danger">Remote Address: </span>
+                            <span>Remote address where machine is connected</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="text-danger">Remort Port: </span>
+                            <span>Remote port where machine is connected</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="text-danger">State: </span>
+                            <span>Status of the connection</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="text-danger">Owning Process: </span>
+                            <span>Process ID of the program that owns that connection.</span>
+                        </li>
+                        <li class="mb-2">
+                            <span class="text-danger">Time: </span>
+                            <span>Time where the machine connected to that address </span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="modal-footer justify-content-center pt-3 pb-2 border-0">
+                <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Connection Tables Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="col-12">
+        <div class="bg-secondary rounded p-4 d-flex flex-column" style="height: 670px;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                <div class="d-flex align-items-center">
+                    <h6 class="mb-0 me-2">TCP Connection</h6>
+                    <button class="btn btn-dark btn-sm rounded-circle d-flex align-items-center justify-content-center"
+                        style="width: 32px; height: 32px;" data-bs-toggle="modal" data-bs-target="#connectioninfoModal">
+                        <i class="fa fa-question-circle"></i>
+                    </button>
+                </div>
+
+                <div class="input-group" style="width: 320px;">
+                    <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search...">
+                    <button id="searchButton" class="btn btn-primary btn-sm">Search</button>
+                </div>
+            </div>
+
+
+            <div id="spinner"
+                class="show position-fixed w-100 vh-100 top-0 start-0 d-flex align-items-center justify-content-center"
+                style="z-index: 1050; display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-responsive flex-grow-1 overflow-auto" style="max-height: 100%;">
+                <table class="table table-bordered table-hover m-0">
+                    <thead class="table-dark sticky-top bg-dark" style="top: 0; z-index: 1050;">
+                        <tr>
+                            <th scope="col">Local Address</th>
+                            <th scope="col">Local Port</th>
+                            <th scope="col">Remote Address</th>
+                            <th scope="col">Remote Port</th>
+                            <th scope="col">State</th>
+                            <th scope="col">Owning Process</th>
+                            <th scope="col">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="nettcpconnection" class="text-white">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Process Name Modal -->
+<div class="modal fade" id="processModal" tabindex="-1" aria-labelledby="processModalLabel" aria-hidden="true"
+    data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog mt-5" style="max-width: 500px;">
+        <div class="modal-content bg-secondary text-white p-4">
+            <div class="modal-body text-center py-4">
+                <div id="modalContent">
+
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center pt-3 pb-2 border-0">
+                <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
