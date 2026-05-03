@@ -1,0 +1,59 @@
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4 align-items-stretch">
+        <!-- About the Project Section -->
+        <div class="col-md-6">
+            <div class="bg-secondary rounded h-100 p-5" style="min-height: 670px;">
+                <div class="text-center">
+                    <h4 class="text-center mb-5 text-white">About the Project</h4>
+                    <div class="overflow-auto d-flex flex-column justify-content-center align-items-center"
+                        style="max-height: 500px; height: 100%;">
+                        <p style="max-width: 800px; font-size: 1.1rem; text-align: justify; margin: 0; color:
+                            rgba(240, 230, 230, 0.93);">
+                            <strong>ThreatHunt</strong> is a tool that uses Event Viewer or log files to identify
+                            anomalies or intrusions against services such as SSH. It allows users to
+                            create firewall rules to permit or block specific connections, enhancing system
+                            protection. Additionally, it logs remote address connections to perform lookups and
+                            retrieve detailed information about those addresses.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Members Section -->
+        <div class="col-md-6">
+            <div class="bg-secondary rounded h-100 p-5" style="min-height: 555px;">
+                <h4 class="text-center mb-5 text-white">Project Members</h4>
+                <div class="owl-carousel testimonial-carousel w-100">
+                    <div class="testimonial-item text-center d-flex flex-column justify-content-center"
+                        style="min-height: 300px;">
+                        <img src="{{ url_for('static', filename='images/members/1.jpg') }}"
+                            class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px; height: 100px;">
+                        <h5 class="text-white mb-1">Jemlyn Guirjen</h5>
+                        <p class="text-muted">UI / UX</p>
+                    </div>
+
+
+                    <div class="testimonial-item text-center d-flex flex-column justify-content-center"
+                        style="min-height: 300px;">
+                        <img src="{{ url_for('static', filename='images/members/2.jpg') }}"
+                            class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px; height: 100px;">
+                        <h5 class="text-white mb-1">Permil Camilan</h5>
+                        <p class="text-muted">Backend Developer</p>
+                    </div>
+
+
+                    <div class="testimonial-item text-center d-flex flex-column justify-content-center"
+                        style="min-height: 300px;">
+                        <img src="{{ url_for('static', filename='images/members/3.jpg') }}"
+                            class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px; height: 100px;">
+                        <h5 class="text-white mb-1">Jerome Fadrigo</h5>
+                        <p class="text-muted">Documenter</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
