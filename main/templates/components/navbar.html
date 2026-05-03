@@ -1,0 +1,72 @@
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-3 py-0">
+    <a href="#" class="sidebar-toggler flex-shrink-0" style="color: #288b9f;">
+        <i class="fa fa-bars"></i>
+    </a>
+
+    <div class="navbar-nav align-items-center ms-auto">
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <img id="ProfilePictureImage" class="rounded-circle"
+                    src="{{ url_for('api.get_User_Profile.getProfileImage', filename=session.get('profile_pic_filename') or 'default-image.jpg') }}"
+                    alt="Profile Picture" style="width: 40px; height: 40px;">
+                <span class="d-none d-lg-inline-flex">{% if logged_in %}{{ username }}{% endif %}
+                </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                <a href="/dash/profile" class="dropdown-item">My Profile</a>
+                <a href="/" class="dropdown-item">Log Out</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- IP Lookup Modal -->
+<div class="modal fade" id="ipLookupModal" tabindex="-1" aria-labelledby="ipLookupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content bg-secondary text-white">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center" id="ipLookupModalLabel">IP Lookup</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-4" id="ip-lookup-form">
+                    <div class="col-md-12">
+                        <label for="ip-address" class="form-label">Enter IP Address</label>
+                        <input type="text" class="form-control" id="ip-address" name="ip" autocomplete="off">
+                    </div>
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary">Lookup</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Shell Modal -->
+<div class="modal fade" id="shellModal" tabindex="-1" aria-labelledby="shellModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content bg-secondary text-white">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center" id="shellModalLabel">Remote Shell</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-4" id="shell-form">
+                    <div class="col-12">
+                        <label for="shell-command" class="form-label">Enter Command</label>
+                        <input type="text" class="form-control" id="shell-command" name="command" autocomplete="off">
+                    </div>
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary">Execute</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navbar End -->

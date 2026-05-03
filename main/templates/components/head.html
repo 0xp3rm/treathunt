@@ -1,0 +1,30 @@
+<head>
+    <meta charset="utf-8">
+    <title>
+        ThreatHunt
+        {% if request.path.startswith('/dash/') %}
+        - Homepage
+        {% elif request.path == '/' %}
+        - Login
+        {% endif %}
+    </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{{url_for('static' , filename='images/logo-ico.png')}}" rel="icon">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="{{url_for('static' , filename='lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static' , filename='lib/owlcarousel/assets/owl.theme.default.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static' , filename='lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}"
+        rel="stylesheet" />
+    <link href="{{url_for('static' , filename='css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static' , filename='css/style.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='lib/iziToast/css/iziToast.css')}}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="{{url_for('static' , filename='css/tabulator.min.css')}}" rel="stylesheet">
+    
+</head>
