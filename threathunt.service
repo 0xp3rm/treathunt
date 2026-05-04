@@ -1,0 +1,29 @@
+[Unit]
+Description=Gunicorn instance to serve ThreatHunt
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=[PROJECT-PATH]
+
+Environment="PATH=/[PROJECT-PATH]/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment="PYTHONPATH=[PROJECT-PATH]"
+Environment="PYTHONUNBUFFERED=1"
+
+ExecStart=[PROJECT-PATH]/venv/bin/gunicorn \
+    --workers 1 \
+    --worker-class geventwebsocket.gunicorn.workers.GeventWebSocketWorker \
+    --bind 0.0.0.0:1337 \
+    --access-logfile [PROJECT-PATH]/access.log \
+    --error-logfile [PROJECT-PATH]/error.log \
+    --access-logformat '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(a)s"' \
+    --capture-output \
+    --enable-stdio-inheritance \
+    app:app
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
