@@ -32,6 +32,9 @@
 - Framework: Flask,  Websocket
 - Frontend: HTML5 , CSS , JS , Bootstrap
 
-
+---
 #### Live Test Endpoint
 👉 http://srv1464717.hstgr.cloud:1337
+
+- USERNAME = admin
+- PASSWORD = admin
